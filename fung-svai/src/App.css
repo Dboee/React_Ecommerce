@@ -2,3 +2,8 @@ body {
     font-family: 'Sora', sans-serif;
     padding: 20px 80px;
 }
+
+a {
+    text-decoration: none;
+    color: black;
+}
