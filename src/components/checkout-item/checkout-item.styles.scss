@@ -23,15 +23,14 @@
   }
 
   .quantity {
-    display:flex;
-    
+    display: flex;
+
     .arrow {
-        cursor:pointer;
+      cursor: pointer;
     }
+
     .value {
-        margin-top: 3px;
-        margin-left: 10px;
-        margin-right:10px;
+      margin: 0 10px;
     }
   }
 
