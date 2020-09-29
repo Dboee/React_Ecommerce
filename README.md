@@ -1,6 +1,5 @@
-## Lesson-28
-
-In this lesson we are using redux-thunk for asynchronous event handling! We have modified our collections-page collections-overview components to use the container pattern to separate their loading logic out of our shop component, and into their own isolated files.
+# react-context-complete
+A complete version of our application converting everything redux over to using the contextAPI
 
 # How to fork and clone
 
