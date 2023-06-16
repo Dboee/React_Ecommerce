@@ -2,16 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-const config = {
-  apiKey: "AIzaSyByPo6S3f6KSnM99ajeR6RK2WVITsEtkS4",
-  authDomain: "fung-svai.firebaseapp.com",
-  databaseURL: "https://fung-svai.firebaseio.com",
-  projectId: "fung-svai",
-  storageBucket: "fung-svai.appspot.com",
-  messagingSenderId: "129376177298",
-  appId: "1:129376177298:web:8959ebc6bac81ba0ed2a4b",
-  measurementId: "G-QB8F84E375"
-};
+import { config } from './firebaseConfig';
 
 firebase.initializeApp(config);
 
@@ -30,7 +21,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createdAt,
-        ...additionalData
+        ...additionalData,
       });
     } catch (error) {
       console.log('error creating user', error.message);
@@ -47,7 +38,7 @@ export const addCollectionAndDocuments = async (
   const collectionRef = firestore.collection(collectionKey);
 
   const batch = firestore.batch();
-  objectsToAdd.forEach(obj => {
+  objectsToAdd.forEach((obj) => {
     const newDocRef = collectionRef.doc();
     batch.set(newDocRef, obj);
   });
@@ -55,15 +46,15 @@ export const addCollectionAndDocuments = async (
   return await batch.commit();
 };
 
-export const convertCollectionsSnapshotToMap = collections => {
-  const transformedCollection = collections.docs.map(doc => {
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollection = collections.docs.map((doc) => {
     const { title, items } = doc.data();
 
     return {
       routeName: encodeURI(title.toLowerCase()),
       id: doc.id,
       title,
-      items
+      items,
     };
   });
 
@@ -75,7 +66,7 @@ export const convertCollectionsSnapshotToMap = collections => {
 
 export const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
-    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
       unsubscribe();
       resolve(userAuth);
     }, reject);
