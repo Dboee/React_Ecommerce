@@ -2,20 +2,23 @@ import { takeLatest, call, put, all } from 'redux-saga/effects';
 
 import {
   firestore,
-  convertCollectionsSnapshotToMap
+  convertCollectionsSnapshotToMap,
 } from '../../firebase/firebase.utils';
 
 import {
   fetchCollectionsSuccess,
-  fetchCollectionsFailure
+  fetchCollectionsFailure,
 } from './shop.actions';
 
 import ShopActionTypes from './shop.types';
 
+// Firebase v9 import
+import { collection, getDocs } from 'firebase/firestore';
+
 export function* fetchCollectionsAsync() {
   try {
-    const collectionRef = firestore.collection('collections');
-    const snapshot = yield collectionRef.get();
+    const collectionRef = collection(firestore, 'collections');
+    const snapshot = yield call(getDocs, collectionRef);
     const collectionsMap = yield call(
       convertCollectionsSnapshotToMap,
       snapshot
